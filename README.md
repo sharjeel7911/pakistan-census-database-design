@@ -19,7 +19,7 @@ A relational database for storing and analyzing national census data, from provi
 
 The schema covers housing quality, utilities (water, lighting, cooking fuel), citizen profiles (CNIC, literacy, income, employment), migration history, and the census field staff who collect all of it.
 
-> 📌 This is our **Semester Final Project** for **Introduction to Database** (Spring 2026), University of Central Punjab.
+> 📌 This was **Semester Final Project** for **Introduction to Database** (Spring 2026)
 
 ---
 
@@ -116,50 +116,94 @@ Multi-table joins are wrapped in views (`Citizen_Record`, `Highly_Educated_Perso
 
 ---
 
-## 📁 Project Structure
-pakistan-census-database/
-├── schema.sql # Table definitions, keys, constraints
-├── data.sql # Sample data for testing
-├── queries.sql # Joins, nested, aggregate, and view queries
-├── erd.png # Entity Relationship Diagram
-├── documentation.pdf # Full project report
-└── README.md
-
-
----
-
 ## 🚀 How to Run
 
-### **Prerequisites**
+### Prerequisites
 
-- MySQL (any recent 8.x release should work)
-- A terminal or a client like MySQL Workbench
+- MySQL Server 8.0.16 or later
+- MySQL command-line client or MySQL Workbench
+- Git
 
-### **Setup**
+### Setup
+
+#### 1. Clone the repository
 
 ```bash
-# Log in to MySQL
+git clone https://github.com/sharjeel7911/pakistan-census-database-design.git
+cd pakistan-census-database-design
+```
+
+#### 2. Create the database and tables
+
+Run the schema file:
+
+```bash
+mysql -u root -p < schema.sql
+```
+
+This creates the `PakistanCensusDatabase` database, its tables, foreign-key constraints, and indexes.
+
+#### 3. Import the sample data
+
+```bash
+mysql -u root -p PakistanCensusDatabase < data.sql
+```
+
+This populates the database with the sample records required for the queries.
+
+#### 4. Run the queries
+
+```bash
+mysql -u root -p PakistanCensusDatabase < queries.sql
+```
+
+This executes the SQL queries and creates the views defined in `queries.sql`.
+
+### Alternative: Interactive MySQL Setup
+
+You can execute all three files from the MySQL client instead:
+
+```bash
 mysql -u root -p
+```
 
-# Create and select the database
-CREATE DATABASE pakistan_census;
-USE pakistan_census;
+Then run the following commands at the `mysql>` prompt:
 
-# Load the schema, then the sample data
+```sql
 SOURCE schema.sql;
 SOURCE data.sql;
-
-# Run the queries
 SOURCE queries.sql;
 ```
 
-Or from the shell in one go:
+Ensure you launch the MySQL client from the project directory so the SQL files can be located.
+
+### Verify the Installation
+
+Connect to the database:
 
 ```bash
-mysql -u root -p pakistan_census < schema.sql
-mysql -u root -p pakistan_census < data.sql
-mysql -u root -p pakistan_census < queries.sql
+mysql -u root -p PakistanCensusDatabase
 ```
+
+List the tables:
+
+```sql
+SHOW TABLES;
+```
+
+Check the number of registered individuals:
+
+```sql
+SELECT COUNT(*) AS total_persons
+FROM Person;
+```
+
+### Important Notes
+
+- The database name is `PakistanCensusDatabase`; use this exact name when connecting.
+- Run the files in order: `schema.sql` → `data.sql` → `queries.sql`.
+- These instructions assume a fresh setup. The schema's standalone `CREATE INDEX` statements may fail if the schema is executed again, and rerunning the sample data may cause duplicate-key errors.
+- Use synthetic sample data and never commit real CNIC numbers or other sensitive personal information to a public repository.
 
 ---
 
@@ -177,20 +221,21 @@ mysql -u root -p pakistan_census < queries.sql
 | Member | Roll No | Role |
 | ------ | ------- | ---- |
 | Azma | L1F24BSCS0674 | Sub-queries, correlated queries, aggregate functions |
-| Sarmad | L1F24BSCS0716 | Multi-table joins, views, documentation |
-| Sharjeel | L1F24BSCS0506 | ERD, schema design, documentation |
-| Zakia | L1F24BSCS0587 | ERD, data insertion, queries |
+| Sarmad | L1F24BSCS0716 | Multi-table joins, views |
+| Sharjeel | L1F24BSCS0506 | ERD, Schema, data insertion, documentation |
+| Zakia | L1F24BSCS0587 | Sub-queries, correlated queries, aggregate functions |
 
 ---
 
 ## 📄 License
 
-This project was built for academic purposes at the University of Central Punjab. If you want to reuse it, feel free to open an issue or PR.
+This project was built for academic purposes.It is open source and available under the [MIT License](https://github.com/sharjeel7911/pakistan-census-database-design/blob/main/LICENSE).
+
 
 ---
 
 <div align="center">
 
-Made with ☕ and way too many foreign keys
+Made with ❤️ and way too many foreign keys
 
 </div>
