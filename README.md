@@ -207,15 +207,6 @@ FROM Person;
 
 ---
 
-## 🎓 Learning Outcomes
-
-- **Database Design**: ERD-first modeling, 3NF normalization, deciding when a 1:1 extension table is worth it
-- **Integrity**: declarative foreign keys, `CASCADE` vs `SET NULL` decisions
-- **SQL**: every join type, nested and correlated subqueries, aggregates with `HAVING`, set operations
-- **Performance Thinking**: compact data types, views, and why flat tables break at scale
-
----
-
 ## 👥 Team
 
 | Member | Roll No | Role |
